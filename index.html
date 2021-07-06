@@ -33,7 +33,7 @@
 <body>
     <main>
         <div id="container">
-            <img class="icon" src="./assets/undraw_Loading.svg" />'
+            <img class="icon" src="./assets/undraw_Loading.svg" alt="Loading Image" />'
         </div>
         <h1 id="Title" style="text-align: center;">Wait</h1>
     </main>
@@ -57,10 +57,10 @@
 
         setInterval(async () => {
             if (await testInternet()){
-                container.innerHTML = '<img class="icon" src="./assets/undraw_broadcast.svg" />';
+                container.innerHTML = '<img class="icon" src="./assets/undraw_broadcast.svg" alt="Signal Image" />';
                 titleElement.innerHTML = 'You have internet! 🎉';
             } else {
-                container.innerHTML = '<img class="icon" src="./assets/undraw_signal_searching.svg" />';
+                container.innerHTML = '<img class="icon" src="./assets/undraw_signal_searching.svg" alt="Searching Signal Image" />';
                 titleElement.innerHTML = "You don't have internet 💔 Checking...";
             }
         }, 3000)
