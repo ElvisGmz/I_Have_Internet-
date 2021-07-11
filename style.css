@@ -1,30 +1,142 @@
 body {
-    background-color: #21212c;
-    color: white;
-    margin: 0;
-    padding: 2rem 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
+  background-color: #21212c;
+  color: white;
+  margin: 0;
+  padding: 2rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-main{
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
+main {
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
 }
 
 #container {
-    max-width: 300px;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.title {
+    z-index: 1000;
+    position: absolute;
+    background-color: #21212cbf;
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: center;
 }
 
 #container .icon {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.pulse-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse {
+  background-color: crimson;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  animation: pulse 1s infinite ease;
+}
+
+.pulse-ring {
+  position: absolute;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  animation: pulse-ring 1s infinite ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.5);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    background-color: dodgerblue;
+  }
+
+  100% {
+    background-color: crimson;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    border: 10px solid transparent;
+    border-left: 10px solid crimson;
+    border-right: 10px solid crimson;
+    transform: rotate(0deg) scale(1);
+  }
+
+  75% {
+    border-left: 1px solid dodgerblue;
+    border-right: 1px solid dodgerblue;
+  }
+
+  100% {
+    transform: rotate(1080deg) scale(2.5);
+    border: 0px solid transparent;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
+  }
+}
+
+.success-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success {
+  background-color: #40e0d0;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+
+.ring-success {
+  position: absolute;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-left: 1px solid #40e0d0;
+  border-right: 1px solid #40e0d0;
+  animation: ring-success 1s infinite linear;
+}
+
+@keyframes ring-success {
+  0% {
+    transform: rotate(0deg) scale(2.5);
+  }
+
+  100% {
+    transform: rotate(720deg) scale(2.5);
+  }
 }

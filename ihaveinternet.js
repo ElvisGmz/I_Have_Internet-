@@ -1,12 +1,9 @@
-var cacheName = ["ihaveinternet_1.0.1"];
+var cacheName = ["ihaveinternet_1.0.2"];
 var filesToCache = [
   "/",
   "/index.html",
   "/style.css",
   "/index.js",
-  "/assets/undraw_broadcast.svg",
-  "/assets/undraw_signal_searching.svg",
-  "/assets/undraw_Loading.svg",
   "/assets/dude.jpg",
   "/assets/icon.svg",
 ];

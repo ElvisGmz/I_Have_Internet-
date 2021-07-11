@@ -1,69 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>I Have Internet? - ElvisGmz</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <script src="./index.js"></script>
-    
-    <link rel="shortcut icon" href="./assets/icon.svg" type="image/x-icon">
+
+    <link rel="shortcut icon" href="./assets/icon.svg" type="image/x-icon" />
     <!-- Primary Meta Tags -->
     <title>I have internet? - ElvisGmz</title>
-    <meta name="title" content="I have internet? - ElvisGmz">
-    <meta name="theme-color" content="#21212c">
-    <meta name="description" content="Get comfortable I'll let you know when your connection has returned">
+    <meta name="title" content="I have internet? - ElvisGmz" />
+    <meta name="theme-color" content="#21212c" />
+    <meta
+      name="description"
+      content="Get comfortable I'll let you know when your connection has returned"
+    />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://i-have-internet.vercel.app/">
-    <meta property="og:title" content="I have internet? - ElvisGmz">
-    <meta property="og:description" content="Get comfortable I'll let you know when your connection has returned">
-    <meta property="og:image" content="https://res.cloudinary.com/superfolio/image/upload/v1625534024/dude_ogtwia.jpg">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://i-have-internet.vercel.app/" />
+    <meta property="og:title" content="I have internet? - ElvisGmz" />
+    <meta
+      property="og:description"
+      content="Get comfortable I'll let you know when your connection has returned"
+    />
+    <meta
+      property="og:image"
+      content="https://res.cloudinary.com/superfolio/image/upload/v1625534024/dude_ogtwia.jpg"
+    />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://i-have-internet.vercel.app/">
-    <meta property="twitter:title" content="I have internet? - ElvisGmz">
-    <meta property="twitter:description" content="Get comfortable I'll let you know when your connection has returned">
-    <meta property="twitter:image" content="https://res.cloudinary.com/superfolio/image/upload/v1625534024/dude_ogtwia.jpg">
-
-</head>
-<body>
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://i-have-internet.vercel.app/"
+    />
+    <meta property="twitter:title" content="I have internet? - ElvisGmz" />
+    <meta
+      property="twitter:description"
+      content="Get comfortable I'll let you know when your connection has returned"
+    />
+    <meta
+      property="twitter:image"
+      content="https://res.cloudinary.com/superfolio/image/upload/v1625534024/dude_ogtwia.jpg"
+    />
+  </head>
+  <body>
     <main>
-        <div id="container">
-            <img class="icon" src="./assets/undraw_Loading.svg" alt="Loading Image" />'
+      <div id="container">
+        <div class="pulse-container">
+          <div class="pulse"></div>
+          <div class="pulse-ring"></div>
         </div>
-        <h1 id="Title" style="text-align: center;">Wait</h1>
+        <div class="title">Loading...</div>
+      </div>
     </main>
     <script>
-        const titleElement = document.querySelector('#Title');
-        const container = document.querySelector('#container')
-        
-        async function testInternet() {
-            try {
-                const online = await fetch('https://res.cloudinary.com/superfolio/image/upload/v1625528030/impickerick_irmwvv.png', {
-                    headers: {
-                        'pragma': 'no-cache',
-                        'cache-control': 'no-cache',
-                    }
-                });
-                return online.status === 200;
-            } catch(error) {
-                return false;
-            }
-        }
+      const titleElement = document.querySelector("#Title");
+      const container = document.querySelector("#container");
+      let success = false;
 
-        setInterval(async () => {
-            if (await testInternet()){
-                container.innerHTML = '<img class="icon" src="./assets/undraw_broadcast.svg" alt="Signal Image" />';
-                titleElement.innerHTML = 'You have internet! 🎉';
-            } else {
-                container.innerHTML = '<img class="icon" src="./assets/undraw_signal_searching.svg" alt="Searching Signal Image" />';
-                titleElement.innerHTML = "You don't have internet 💔 Checking...";
+      (async () => {
+        // show an error message
+        const showError = () => {
+          const error = document.querySelector(".error");
+          error.style.display = "block";
+          error.textContent = "You blocked the notifications";
+        };
+
+        // check notification permission
+        let granted = false;
+
+        if (Notification.permission === "granted") {
+          granted = true;
+        } else if (Notification.permission !== "denied") {
+          let permission = await Notification.requestPermission();
+          granted = permission === "granted" ? true : false;
+        }
+      })();
+
+      async function testInternet() {
+        try {
+          const online = await fetch(
+            "https://res.cloudinary.com/superfolio/image/upload/v1625528030/impickerick_irmwvv.png",
+            {
+              headers: {
+                pragma: "no-cache",
+                "cache-control": "no-cache",
+              },
             }
-        }, 3000)
+          );
+          return online.status === 200;
+        } catch (error) {
+          return false;
+        }
+      }
+
+      setInterval(async () => {
+        if ((await testInternet()) && success == false) {
+          container.innerHTML = `
+            <div class="success-container">
+                <div class="success"></div>
+                <div class="ring-success"></div>
+            </div>
+            <div class="title">You have internet!</div>
+          `;
+          success = true;
+
+          // create and show the notification
+          function showNotification({ title, body }) {
+            // create a new notification
+            const notification = new Notification(title, {
+              body,
+              icon: "./assets/icon.svg",
+            });
+
+            // close the notification after 10 seconds
+            setTimeout(() => {
+              notification.close();
+            }, 10 * 1000);
+
+            // navigate to a URL when clicked
+            // notification.addEventListener("click", () => {
+            // window.open("https://i-have-internet.vercel.app/", "_blank");
+            // });
+          }
+          showNotification({
+            title: "I Have Internet?",
+            body: "You have internet!",
+          });
+        } else if ((await testInternet()) == false && success == true) {
+          container.innerHTML = `
+                <div class="pulse-container">
+                    <div class="pulse"></div>
+                    <div class="pulse-ring"></div>
+                </div>
+                <div class="title">You don't have internet, checking...</div>
+            `;
+          success = false;
+
+          // create and show the notification
+          function showNotification({ title, body }) {
+            // create a new notification
+            const notification = new Notification(title, {
+              body,
+              icon: "./assets/icon.svg",
+            });
+
+            // close the notification after 10 seconds
+            setTimeout(() => {
+              notification.close();
+            }, 10 * 1000);
+
+            // navigate to a URL when clicked
+            notification.addEventListener("click", () => {
+              window.open("https://i-have-internet.vercel.app/", "_blank");
+            });
+          }
+          showNotification({
+            title: "I Have Internet?",
+            body: "You don't have internet, checking...",
+          });
+        }
+      }, 3000);
     </script>
-</body>
+  </body>
 </html>
