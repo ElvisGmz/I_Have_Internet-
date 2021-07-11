@@ -54,7 +54,7 @@
           <div class="pulse"></div>
           <div class="pulse-ring"></div>
         </div>
-        <div class="title">Loading...</div>
+        <div class="title">Waiting for connection...</div>
       </div>
     </main>
     <script>
@@ -137,7 +137,7 @@
                     <div class="pulse"></div>
                     <div class="pulse-ring"></div>
                 </div>
-                <div class="title">You don't have internet, checking...</div>
+                <div class="title">You don't have internet, waiting for connection...</div>
             `;
           success = false;
 
@@ -155,13 +155,13 @@
             }, 10 * 1000);
 
             // navigate to a URL when clicked
-            notification.addEventListener("click", () => {
-              window.open("https://i-have-internet.vercel.app/", "_blank");
-            });
+            // notification.addEventListener("click", () => {
+            //   window.open("https://i-have-internet.vercel.app/", "_blank");
+            // });
           }
           showNotification({
             title: "I Have Internet?",
-            body: "You don't have internet, checking...",
+            body: "You don't have internet, waiting for connection...",
           });
         }
       }, 3000);
