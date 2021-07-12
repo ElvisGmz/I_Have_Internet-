@@ -1,4 +1,4 @@
-var cacheName = ["ihaveinternet_1.0.3"];
+var cacheName = ["ihaveinternet_1.0.4"];
 var filesToCache = [
   "/",
   "/index.html",

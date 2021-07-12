@@ -1,0 +1,17 @@
+{
+  "theme_color": "#21212c",
+  "background_color": "#21212c",
+  "display": "browser",
+  "scope": "/",
+  "start_url": "/",
+  "description": "Get comfortable I'll let you know when your connection has returned",
+  "short_name": "I Have Internet?",
+  "name": "I Have Internet? - ElvisGmz",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ]
+}
